@@ -32,6 +32,18 @@ app.get('/db', function (request, response) {
   });
 });
 
+app.get('/salesforce', function (request, response) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('SELECT firstname,lastname FROM salesforce.contact', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('pages/db', {results: result.rows} ); }
+    });
+  });
+});
+
 app.get('/clocks', function (req, res, next) {
   const start = new Date().getTime();
   while (new Date().getTime() < start + 100);
