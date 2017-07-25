@@ -34,7 +34,7 @@ app.get('/db', function (request, response) {
 
 app.get('/salesforce', function (request, response) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    client.query('SELECT * FROM salesforce.contact ORDER BY systemmodstamp DESC', function(err, result) {
+    client.query('SELECT * FROM salesforce.contact ORDER BY firstname ASC', function(err, result) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
