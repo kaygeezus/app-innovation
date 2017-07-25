@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var pg = require('pg');
+var newrelic = require('newrelic');
 
 app.set('port', (process.env.PORT || 5000));
 
